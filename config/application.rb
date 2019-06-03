@@ -15,5 +15,16 @@ module FinancialTracker
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    config.autoload_paths << Rails.root.join('lib')
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :options, :delete], :credentials => false
+      end
+    end
+    config.api_only = true
+
   end
 end

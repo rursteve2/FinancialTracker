@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+User.destroy_all
+Record.destroy_all
+
+
+user1 = User.create(username: "hello", password: "helloworld", password_confirmation: "helloworld", first_name: "steve", last_name: "jobs")
+user2 = User.create(username: "goodbye", password: "helloworld", password_confirmation: "helloworld", first_name: "steve", last_name: "wozniak")
+user3 = User.create(username: "morning", password: "helloworld", password_confirmation: "helloworld", first_name: "ronald", last_name: "wayne")
+
+rec1 = Record.create(name: "bagel", price: 2.25, category: "food", date: DateTime.new(2019, 6, 1), frequency: "Daily", income_expense: "expense")
+rec2 = Record.create(name: "online shopping", price: 184.12, category: "misc", date: DateTime.new(2019, 6, 1), frequency: "Daily", income_expense: "expense")
+rec3 = Record.create(name: "gift", price: 12.25, category: "misc", date: DateTime.new(2019, 6, 1), frequency: "Once", income_expense: "expense")
+rec4 = Record.create(name: "vacation", price: 1032.15, category: "travel", date: DateTime.new(2019, 6, 1), frequency: "Once", income_expense: "expense")
+rec5 = Record.create(name: "dinner", price: 22.25, category: "food", date: DateTime.new(2019, 6, 1), frequency: "Daily", income_expense: "expense")
+rec6 = Record.create(name: "income", price: 294, category: "job", date: DateTime.new(2019, 6, 1), frequency: "Monthly", income_expense: "income")
+rec7 = Record.create(name: "income", price: 192.25, category: "other", date: DateTime.new(2019, 6, 1), frequency: "Once", income_expense: "income")
+
+# user1.records.push(rec1, rec2, rec3)
