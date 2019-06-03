@@ -7,6 +7,7 @@ class CreateRecords < ActiveRecord::Migration[5.2]
       t.date :date
       t.string :frequency
       t.string :income_expense
+      t.belongs_to :user, index: true
 
       t.timestamps
     end
