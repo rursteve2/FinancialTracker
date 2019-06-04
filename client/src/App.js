@@ -7,7 +7,7 @@ import DailyExpenses from './components/DailyExpenses'
 import MonthlyExpenses from './components/MonthlyExpenses'
 import CalendarView from './components/CalendarView'
 import Register from './components/Register'
-import { loginUser } from './services/api'
+import { loginUser, createUser } from './services/api'
 
 
 class App extends Component {
@@ -21,6 +21,7 @@ class App extends Component {
       password: "",
       passwordConfirm: "",
       isLoggedIn: false,
+      isCreated: false,
       userId:""
     }
   }
@@ -52,8 +53,22 @@ class App extends Component {
     this.setState({[name]: value})
 }
 
-  onRegisterSubmit = () => {
-
+  onRegisterSubmit = async () => {
+    try {
+      const setUser = {
+        "username": this.state.username,
+        "password": this.state.password,
+        "password_confirmation": this.state.passwordConfirm,
+        "first_name": this.state.firstName,
+        "last_name": this.state.lastName
+      }
+      const user = await createUser(setUser)
+      this.setState({
+        isCreated: true
+      })
+    } catch (e) {
+      console.log(e)
+    }
   }
 
 
@@ -79,6 +94,8 @@ class App extends Component {
             passwordConfirm={this.state.passwordConfirm}
             firstName={this.state.firstName}
             lastName={this.state.lastName}
+            isCreated={this.state.isCreated}
+            onRegisterSubmit={this.onRegisterSubmit}
 
             />}/>
           <Route path="/daily" render={() => <DailyExpenses />}/>

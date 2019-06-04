@@ -16,3 +16,12 @@ export const loginUser = async(data)=>{
       console.log(e);
     }
 }
+
+export const createUser = async(data)=>{
+    try {
+      const resp = await api.post('/users', data)
+      return resp.data
+    } catch (e) {
+    console.log(e);
+    }
+  }

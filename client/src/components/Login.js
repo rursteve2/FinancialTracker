@@ -11,8 +11,8 @@ class Login extends Component {
         <div>
             <h2>Login</h2>
             <form className="login" onSubmit={onLoginSubmit}>
-                <input type="text" placeholder="Username" name="username" value={username} onChange={onFormChange}/>
-                <input type="text" placeholder="Password" name="password" value={password} onChange={onFormChange}/>
+                <input type="text" placeholder="Username" name="username" value={username} onChange={onFormChange} required/>
+                <input type="text" placeholder="Password" name="password" value={password} onChange={onFormChange} required/>
                 <input type="submit"/>
             </form>
             <p>Or register <Link to="/register">here</Link></p>
