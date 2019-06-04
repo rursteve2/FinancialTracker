@@ -11,6 +11,7 @@ class User < ApplicationRecord
               presence: true,
               length: { minimum: 5 },
               if: -> { new_record? || !password.nil? }
+ 
 end
   
   
