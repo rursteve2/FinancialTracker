@@ -4,20 +4,17 @@ import { Link } from 'react-router-dom'
 class Header extends Component {
   render() {
     return (
-      <div>
+      <div className="header">
         <nav>
             <Link to="/">
-                Home
-            </Link>
-            <ul>
                 Login/Signup
-            </ul>
-            <ul>
-                Two
-            </ul>
-            <ul>
-                Three
-            </ul>
+            </Link>
+            <Link to="/daily">
+                Daily Expenses
+            </Link>
+            <Link to="/monthly">
+                Monthly Expenses
+            </Link>
         </nav>
       </div>
     );
