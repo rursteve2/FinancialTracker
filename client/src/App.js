@@ -22,20 +22,45 @@ class App extends Component {
       isLoggedIn: false,
       isCreated: false,
       userId:"",
-      apiData: {},
+      apiData: [],
       token: null,
-      filteredData: []
+      filteredData:[],
+      dailyExpense: 0,
+      monthlyExpense: 0,
+      income: 0,
+      other: 0,
     }
   }
 
   onDateChange = async (date) => {
     await this.setState({ date, 
-      formattedDate: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`, 
-      filteredData: "" })
-    console.log(this.state.apiData, this.state.formattedDate, this.state.filteredData)
-    // const dateRecords = await getRecordsByDate(this.state.userId, this.state.formattedDate, this.state.token)
-    // console.log(dateRecords)
+      formattedDate: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}` })
+      // console.log(this.state.apiData[0].date)
+      this.onDataChange()
+      console.log(Date.parse(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`))
+      // console.log(this.state.apiData[0].date)
+     
 
+    // console.log(this.state.apiData, this.state.formattedDate, this.state.filteredData)
+
+  }
+
+  onDataChange = async () => {
+    let newData = await this.state.apiData.filter((result) => 
+    result.date == Date.parse(`${this.state.date.getFullYear()}-${this.state.date.getMonth()}-${this.state.date.getDate()}`))
+    console.log(newData)
+    let getPrice = newData.map((item)=> item.price)
+    let sumPrice = getPrice.reduce((num, a) => num += a,0); 
+    this.setState({
+      filteredData: newData,
+      dailyExpense : sumPrice
+    })
+  }
+
+  setSum = (num) => {
+    this.setState({
+      dailyExpense: num
+    })
   }
 
   onLoginSubmit = async (e) => {
@@ -50,22 +75,26 @@ class App extends Component {
           isLoggedIn: true,
           userId: user.user_id,
           token: user.token,
-          firstName: user.first_name,
-          lastName: user.last_name,
+          firstName: user.user.first_name,
+          lastName: user.user.last_name,
           password: ""
         })
-        // this.onChangeHandler(user.token)
         localStorage.setItem('token', user.token)
         console.log(this.state.userId, this.state.isLoggedIn, this.state.token)
-        let allRecords = await getRecords(this.state.userId, this.state.token)
-        console.log('all',allRecords)
-        this.setState({
-          apiData: allRecords
-        })
+        this.fetchRecords()
     } catch(e) {
       alert("Wrong username or password")
       console.log("Wrong Username or Password: ", e)
     }
+  }
+
+  fetchRecords = async () => {
+    let allRecords = await getRecords(this.state.userId, this.state.token)
+        console.log('all',allRecords)
+        this.setState({
+          apiData: allRecords
+        })
+        this.onDataChange()
   }
 
   componentDidMount = () => {
@@ -148,6 +177,16 @@ class App extends Component {
             onFormChange={this.onFormChange}
             token={this.state.token}
             userId={this.state.userId}
+            apiData={this.state.apiData}
+            isLoggedIn={this.state.isLoggedIn}
+            formattedDate={this.state.formattedDate}
+            filteredData={this.state.filteredData}
+            firstName={this.state.firstName}
+            dailyExpense={this.state.dailyExpense}
+            onCalendarChange={this.state.onCalendarChange}
+            setSum={this.setSum}
+            onDataChange={this.onDataChange}
+            fetchRecords={this.fetchRecords}
             />}/>
             
         </Switch>

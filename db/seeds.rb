@@ -19,15 +19,15 @@ rec1 = Record.create(
     name: "bagel",
      price: 2.25,
       category: "food",
-      date: DateTime.new(2019, 6, 1),
+      date: 1556683200000,
        frequency: "Daily",
        income_expense: "expense")
-rec2 = Record.create(name: "online shopping", price: 184.12, category: "misc", date: DateTime.new(2019, 6, 1), frequency: "Daily", income_expense: "expense")
-rec3 = Record.create(name: "gift", price: 12.25, category: "misc", date: DateTime.new(2019, 6, 1), frequency: "Once", income_expense: "expense")
-rec4 = Record.create(name: "vacation", price: 1032.15, category: "travel", date: DateTime.new(2019, 6, 1), frequency: "Once", income_expense: "expense")
-rec5 = Record.create(name: "dinner", price: 22.25, category: "food", date: DateTime.new(2019, 6, 1), frequency: "Daily", income_expense: "expense")
-rec6 = Record.create(name: "income", price: 294, category: "job", date: DateTime.new(2019, 6, 1), frequency: "Monthly", income_expense: "income")
-rec7 = Record.create(name: "income", price: 192.25, category: "other", date: DateTime.new(2019, 6, 1), frequency: "Once", income_expense: "income")
+rec2 = Record.create(name: "online shopping", price: 184.12, category: "misc", date: 1556683200000, frequency: "Daily", income_expense: "expense")
+rec3 = Record.create(name: "gift", price: 12.25, category: "misc", date: 1556856000000, frequency: "Once", income_expense: "expense")
+rec4 = Record.create(name: "vacation", price: 1032.15, category: "travel", date: 1557028800000, frequency: "Once", income_expense: "expense")
+rec5 = Record.create(name: "dinner", price: 22.25, category: "food", date: 1556942400000, frequency: "Daily", income_expense: "expense")
+rec6 = Record.create(name: "income", price: 294, category: "job", date: 1556856000000, frequency: "Monthly", income_expense: "income")
+rec7 = Record.create(name: "income", price: 192.25, category: "other", date: 1556942400000, frequency: "Once", income_expense: "income")
 
 user1.records.push(rec1, rec2, rec3)
 user2.records.push(rec4, rec5)

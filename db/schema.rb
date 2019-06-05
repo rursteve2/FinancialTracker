@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_06_03_185002) do
     t.string "name"
     t.float "price"
     t.string "category"
-    t.date "date"
+    t.string "date"
     t.string "frequency"
     t.string "income_expense"
     t.bigint "user_id"
