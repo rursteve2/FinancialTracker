@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom'
 class Login extends Component {
   render() {
     const { username, password, onFormChange, onLoginSubmit, isLoggedIn } = this.props
-    const afterLogin = isLoggedIn ? <Redirect to="/daily"/> : null
+    const afterLogin = isLoggedIn ? <Redirect to="/calendar/daily"/> : null
     return (
       <div>
         {afterLogin}

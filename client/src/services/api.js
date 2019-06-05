@@ -2,12 +2,11 @@ import axios from 'axios'
 
 const URL = `http://localhost:4567`;
 
-// for the photo/video/posts uploads.
 const api = axios.create({
     baseURL: `${URL}`
 })
 
-export const loginUser = async(data)=>{
+export const loginUser = async (data) => {
     try {
       const resp = await api.post(`/auth/login`, data)
       console.log(resp.data)
@@ -17,11 +16,31 @@ export const loginUser = async(data)=>{
     }
 }
 
-export const createUser = async(data)=>{
+export const createUser = async (data) => {
     try {
       const resp = await api.post('/users', data)
       return resp.data
     } catch (e) {
     console.log(e);
     }
-  }
+}
+
+export const getRecords = async (userId, token) => {
+    try {
+        const resp = await api.get(`/users/${userId}/records`, {headers: {"Authorization": token}})
+        console.log(resp)
+        return resp
+    } catch(e) {
+        console.log(e)
+    }
+}
+
+export const makeRecord = async (userId, data, token) => {
+    try {
+        const resp = await api.post(`/users/${userId}/records`, data, {headers: {"Authorization": token}})
+        console.log(resp)
+        return resp
+    } catch (e) {
+        console.log(e)
+    }
+}

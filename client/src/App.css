@@ -5,10 +5,18 @@
   max-width: 500px;
   background-color: #f4f4f4;
   color: black;
+  align-content: center;
+  margin: 0 auto;
+  display: flex;
+  flex: 1;
 }
 
 nav {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.switch {
+  flex: 1;
 }

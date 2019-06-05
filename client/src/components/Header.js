@@ -9,11 +9,14 @@ class Header extends Component {
             <Link to="/">
                 Login/Signup
             </Link>
-            <Link to="/daily">
+            <Link to="/calendar/daily">
                 Daily Expenses
             </Link>
-            <Link to="/monthly">
+            <Link to="/calendar/monthly">
                 Monthly Expenses
+            </Link>
+            <Link to="/calendar">
+                Calendar
             </Link>
         </nav>
       </div>
