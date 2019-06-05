@@ -13,8 +13,9 @@ class DailyExpenses extends Component {
             category: "Other",
             frequency: "Once",
             incomeExpense: "Expense",
-            date: "",
-            isAdded: false
+            date: `${this.props.date.getFullYear()}-${this.props.date.getMonth()+1}-${this.props.date.getDate()}`,
+            isAdded: false,
+            recordData:[]
         }
     }
 
@@ -98,10 +99,19 @@ class DailyExpenses extends Component {
           console.log(e)
         }
       }
-      onFormChange = (event) => {
+    onFormChange = (event) => {
         const { name, value } = event.target;
         this.setState({[name]: value})
     }
+
+    // componentDidMount = () => {
+    //     const { token, userId } = this.props
+    //     let records = getRecordsByDate(userId, this.state.date, token)
+    //     this.setState({
+    //         recordData: records.data
+    //     })
+    //     console.log(this.state.recordData)
+    // }
 
   render() {
       const { onFormChange } = this

@@ -72,6 +72,20 @@ class RecordsController < ApplicationController
     record.destroy(params[:id])
     end
 
+    # def get_record_by_date
+    #     user = User.find params[:user_id]
+    #     @date = params[:date].split('-')
+    #     year = Integer(@date[0])
+    #     month = Integer(@date[1])
+    #     day = Integer(@date[2])
+    #     @date_records = user.records.where(date: Date.new(year, month, day))
+    #     render json: { recordsByDate: @date_records }
+    # end
+
+    # def update_record_by_date
+
+    # end
+
     private
 
     def record_params

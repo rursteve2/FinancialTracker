@@ -28,8 +28,8 @@ export const createUser = async (data) => {
 export const getRecords = async (userId, token) => {
     try {
         const resp = await api.get(`/users/${userId}/records`, {headers: {"Authorization": token}})
-        console.log(resp)
-        return resp
+        console.log(resp.data)
+        return resp.data.records
     } catch(e) {
         console.log(e)
     }
@@ -44,3 +44,13 @@ export const makeRecord = async (userId, data, token) => {
         console.log(e)
     }
 }
+
+// export const getRecordsByDate = async (userId, date, token) => {
+//     try {
+//         const resp = await api.get(`/users/${userId}/records/date/${date}`, {headers: {"Authorization": token}})
+//         console.log(resp)
+//         return resp
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }

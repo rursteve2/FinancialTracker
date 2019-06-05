@@ -14,7 +14,7 @@ class CalendarView extends Component {
         <Calendar
           onChange={onDateChange}
           value={date}
-          showNavigation={true}
+        //   showNavigation={true}
         />
         
         </div>

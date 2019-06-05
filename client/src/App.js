@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
-import { Route, Switch, Redirect } from 'react-router-dom'
-// import DailyExpenses from './components/DailyExpenses'
-// import MonthlyExpenses from './components/MonthlyExpenses'
+import { Route, Switch } from 'react-router-dom'
 import CalendarView from './components/CalendarView'
 import Register from './components/Register'
 import { loginUser, createUser, getRecords } from './services/api'
@@ -15,6 +13,7 @@ class App extends Component {
     super()
     this.state = {
       date: new Date(),
+      formattedDate: "",
       firstName: "",
       lastName: "",
       username: "",
@@ -24,13 +23,19 @@ class App extends Component {
       isCreated: false,
       userId:"",
       apiData: {},
-      token: null
+      token: null,
+      filteredData: []
     }
   }
 
-  // onDateChange = date => this.setState({ date })
-  onDateChange = (date) => {
-    this.setState({ date })
+  onDateChange = async (date) => {
+    await this.setState({ date, 
+      formattedDate: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`, 
+      filteredData: "" })
+    console.log(this.state.apiData, this.state.formattedDate, this.state.filteredData)
+    // const dateRecords = await getRecordsByDate(this.state.userId, this.state.formattedDate, this.state.token)
+    // console.log(dateRecords)
+
   }
 
   onLoginSubmit = async (e) => {
@@ -41,19 +46,33 @@ class App extends Component {
         "password": this.state.password
       }
       const user = await loginUser(login)
-      this.setState({
-        isLoggedIn: true,
-        userId: user.user_id,
-        token: user.token
-      })
-      // this.onChangeHandler(user.token)
-      // localStorage.setItem('token', user.token)
-      console.log(this.state.userId, this.state.isLoggedIn, this.state.token)
-      getRecords(this.state.userId, this.state.token)
-
+        this.setState({
+          isLoggedIn: true,
+          userId: user.user_id,
+          token: user.token,
+          firstName: user.first_name,
+          lastName: user.last_name,
+          password: ""
+        })
+        // this.onChangeHandler(user.token)
+        localStorage.setItem('token', user.token)
+        console.log(this.state.userId, this.state.isLoggedIn, this.state.token)
+        let allRecords = await getRecords(this.state.userId, this.state.token)
+        console.log('all',allRecords)
+        this.setState({
+          apiData: allRecords
+        })
     } catch(e) {
       alert("Wrong username or password")
       console.log("Wrong Username or Password: ", e)
+    }
+  }
+
+  componentDidMount = () => {
+    if (localStorage.getItem('token') != null) {
+      this.setState({
+        token: localStorage.getItem('token')
+      })
     }
   }
 
