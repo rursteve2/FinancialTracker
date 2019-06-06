@@ -55,6 +55,15 @@ export const deleteRecord = async (userId, id, token) => {
     }
 }
 
+export const updateRecord = async (userId, id, data, token) => {
+    try {
+        const resp = await api.put(`/users/${userId}/records/${id}`, data, {headers: {"Authorization": token}} )
+        return resp
+      } catch (e) {
+        console.log(e);
+      }
+}
+
 // export const deletePosting = async (e, id) => {
 //     await axios.delete(`http://localhost:4567/post/${this.props.post.id}`);
 //     this.props.deletePost(this.props.id)

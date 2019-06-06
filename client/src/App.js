@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom'
 import CalendarView from './components/CalendarView'
 import Register from './components/Register'
 import { loginUser, createUser, getRecords } from './services/api'
+import { async } from 'q';
 
 
 class App extends Component {
@@ -23,12 +24,13 @@ class App extends Component {
       isCreated: false,
       userId:"",
       apiData: [],
+      current: [],
       token: null,
       filteredData:[],
       dailyExpense: 0,
       monthlyExpense: 0,
       income: 0,
-      other: 0,
+      other: 0
     }
   }
 
@@ -44,10 +46,57 @@ class App extends Component {
 
   }
 
+  changeEntry = async (e, index, id) => {
+    e.preventDefault()
+    console.log("updating", id)
+    console.log(e.target.value)
+    let {filteredData, current} = this.state
+    filteredData[index].isEdit = true
+    filteredData.forEach( (element,index) => {
+      current[index] = {...element}
+      
+    });
+    await this.setState({
+      filteredData,
+      current: [...current]
+    })
+}
+closeEntry = async (e, index, id) => {
+  console.log("updating", id)
+  let {filteredData, current} = this.state
+  filteredData[index] = {...current[index]}
+  filteredData[index].isEdit = false
+  console.log(this.state.current)
+  await this.setState({
+    filteredData
+  })
+
+}
+closeEntrySubmit = async (index) => {
+  let {filteredData, current} = this.state
+  filteredData.forEach( (element, index2) => {
+    if(index2 !== index){
+      element = {...current[index]}
+    }
+    element.isEdit = false
+    
+  });
+  console.log(this.state.current)
+  await this.setState({
+    filteredData
+  })
+
+}
+
+
+
   onDataChange = async () => {
     let newData = await this.state.apiData.filter((result) => 
     result.date == Date.parse(`${this.state.date.getFullYear()}-${this.state.date.getMonth()}-${this.state.date.getDate()}`))
     console.log(newData)
+    newData.forEach(el => {
+      el.isEdit = false
+    });
     let getPrice = newData.map((item)=> item.price)
     let sumPrice = getPrice.reduce((num, a) => num += a,0); 
     this.setState({
@@ -91,7 +140,7 @@ class App extends Component {
     let allRecords = await getRecords(this.state.userId, this.state.token)
         console.log('all',allRecords)
         this.setState({
-          apiData: allRecords
+          apiData: allRecords,
         })
         this.onDataChange()
   }
@@ -108,6 +157,12 @@ class App extends Component {
   onFormChange = (event) => {
     const { name, value } = event.target;
     this.setState({[name]: value})
+}
+onFormItemChange = (event, index) => {
+  const { name, value } = event.target;
+  const {filteredData} = this.state
+  filteredData[index][name] = value
+   this.setState({filteredData})
 }
 
   onRegisterSubmit = async (e) => {
@@ -199,6 +254,10 @@ class App extends Component {
             setSum={this.setSum}
             onDataChange={this.onDataChange}
             fetchRecords={this.fetchRecords}
+            changeEntry={this.changeEntry}
+            closeEntry={this.closeEntry}
+            closeEntrySubmit={this.closeEntrySubmit}
+            onFormItemChange={this.onFormItemChange}
             />}/>
             
         </Switch>

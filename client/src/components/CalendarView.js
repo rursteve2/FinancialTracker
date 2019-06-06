@@ -15,14 +15,8 @@ class CalendarView extends Component {
         }
     }
 
-    submittedf= () => {
-        this.setState({
-            submitted: true
-        })
-    }
-
   render() {
-      const { onDateChange, date, onFormChange, token, userId, apiData, todaysDate, isLoggedIn, firstName, filteredData, dailyExpense, setSum, onDataChange, fetchRecords } = this.props
+      const { onDateChange, date, onFormChange, token, userId, apiData, todaysDate, isLoggedIn, firstName, filteredData, dailyExpense, setSum, onDataChange, fetchRecords, changeEntry, closeEntry, onFormItemChange,closeEntrySubmit } = this.props
     return (
     <div>
         {userId && token ? null : <Redirect to="/"/>}
@@ -52,6 +46,10 @@ class CalendarView extends Component {
                 setSum={setSum}
                 onDataChange={onDataChange}
                 fetchRecords={fetchRecords}
+                changeEntry={changeEntry}
+                closeEntry={closeEntry}
+                closeEntrySubmit={closeEntrySubmit}
+                onFormItemChange={onFormItemChange}
                 />}/>
                 <Route path="/calendar/monthly" render={()=> <MonthlyExpenses />}/>
             </Switch>
