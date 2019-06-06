@@ -32,4 +32,3 @@ rec7 = Record.create(name: "income", price: 192.25, category: "other", date: 155
 user1.records.push(rec1, rec2, rec3)
 user2.records.push(rec4, rec5)
 user3.records.push(rec6, rec7)
-# rec2.user = user1

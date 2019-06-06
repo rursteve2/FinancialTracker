@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { makeRecord, getRecords } from '../services/api'
+import { makeRecord, getRecords, deleteRecord } from '../services/api'
 let categories = ["Breakfast", "Lunch", "Dinner", "Household Items", "Apparel", "Utilities", "Rent/Mortgage", "Subscriptions", "Groceries", "Travel", "Transportation"]
 let frequencies = ["Daily", "Monthly"]
 
@@ -88,19 +88,6 @@ class DailyExpenses extends Component {
             console.log(Date.parse(this.props.date))
             console.log(setRecord)
             this.props.fetchRecords()
-            // let allRecords = await getRecords(this.props.userId, this.props.token)
-            // this.setState({allData: allRecords})
-            // let newData = await this.state.allData.filter((result) => 
-            // result.date == Date.parse(`${this.props.date.getFullYear()}-${this.props.date.getMonth()}-${this.props.date.getDate()}`))
-            // console.log(newData)
-            // this.setState({
-            //     recordData: newData
-            // })
-            // let getPrice = this.state.recordData.map((item)=> item.price)
-            // let sumPrice = getPrice.reduce((num, a) => num += a,0); 
-
-
-            // this.props.setSum(sumPrice)
             if (record === undefined) {
                 alert("Please Log In")
             } else {
@@ -117,6 +104,12 @@ class DailyExpenses extends Component {
         }
       }
 
+      deletePost = async (e, id) => {
+          e.preventDefault()
+          await deleteRecord(this.props.userId, id)
+          console.log("Deleted post with id", id)
+      }
+
       
     onFormChange = (event) => {
         const { name, value } = event.target;
@@ -126,7 +119,7 @@ class DailyExpenses extends Component {
   render() {
       const { onFormChange } = this
       const { name, price, category, frequency, incomeExpense, date, recordData } = this.state
-      let { filteredData, dailyExpense, onCalendarChange } = this.props
+      let { filteredData, dailyExpense, onCalendarChange, token } = this.props
       let allCategories = categories.map((c) => (<option>{c}</option>))
       let allFrequencies = frequencies.map((f) => (<option>{f}</option>))
       let data = filteredData.map((item) => (
@@ -134,8 +127,9 @@ class DailyExpenses extends Component {
             <tr>
                 <td>{item.name}</td>
                 <td>{item.category}</td>
-                <td>{item.price}</td>
                 <td>{item.frequency}</td>
+                <td>{item.price}</td>
+                <button onClick={e => this.deletePost(e, item.id, token)}>Delete</button>
             </tr>
       </div>))
       console.log(recordData)

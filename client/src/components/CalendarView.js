@@ -34,7 +34,7 @@ class CalendarView extends Component {
         />
         
         </div>
-        <h3>You have spent ${dailyExpense} today.</h3>
+        <h3>You spent ${dailyExpense.toFixed(2)} on {`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`}.</h3>
         <div className="switch">
             <Switch>
                 <Route path="/calendar/daily" render={() => 
