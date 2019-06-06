@@ -13,7 +13,7 @@ class App extends Component {
     super()
     this.state = {
       date: new Date(),
-      formattedDate: "",
+      todaysDate: new Date(),
       firstName: "",
       lastName: "",
       username: "",
@@ -33,15 +33,14 @@ class App extends Component {
   }
 
   onDateChange = async (date) => {
-    await this.setState({ date, 
-      formattedDate: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}` })
+    await this.setState({ date })
       // console.log(this.state.apiData[0].date)
       this.onDataChange()
       console.log(Date.parse(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`))
       // console.log(this.state.apiData[0].date)
      
 
-    // console.log(this.state.apiData, this.state.formattedDate, this.state.filteredData)
+    // console.log(this.state.apiData, this.state.todaysDate, this.state.filteredData)
 
   }
 
@@ -101,6 +100,7 @@ class App extends Component {
     if (localStorage.getItem('token') != null) {
       this.setState({
         token: localStorage.getItem('token')
+        // todaysDate: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
       })
     }
   }
@@ -133,6 +133,16 @@ class App extends Component {
     }
   }
 
+  logout = () => {
+    localStorage.clear()
+    this.setState({
+      userId: "",
+      token: null,
+      apiData:[],
+      isLoggedIn: false
+    })
+  }
+
   // submitRecord = (id, data,  ) => {
   //   try {
 
@@ -146,7 +156,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header 
+        logout={this.logout}
+        userId={this.state.userId}
+        token={this.state.token}
+        />
         <Switch>
           <Route exact path="/" render={() => 
               <Login 
@@ -168,8 +182,6 @@ class App extends Component {
             onRegisterSubmit={this.onRegisterSubmit}
 
             />}/>
-          {/* <Route path="/daily" render={() => <DailyExpenses />}/>
-          <Route path="/monthly" render={()=> <MonthlyExpenses />}/> */}
           <Route path="/calendar" render={() => 
             <CalendarView 
             onDateChange={this.onDateChange} 
@@ -179,7 +191,7 @@ class App extends Component {
             userId={this.state.userId}
             apiData={this.state.apiData}
             isLoggedIn={this.state.isLoggedIn}
-            formattedDate={this.state.formattedDate}
+            todaysDate={this.state.todaysDate}
             filteredData={this.state.filteredData}
             firstName={this.state.firstName}
             dailyExpense={this.state.dailyExpense}

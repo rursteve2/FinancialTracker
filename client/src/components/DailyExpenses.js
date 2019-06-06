@@ -106,7 +106,9 @@ class DailyExpenses extends Component {
 
       deletePost = async (e, id) => {
           e.preventDefault()
-          await deleteRecord(this.props.userId, id)
+          await deleteRecord(this.props.userId, id, this.props.token)
+          this.props.fetchRecords()
+          this.props.onDataChange()
           console.log("Deleted post with id", id)
       }
 
@@ -119,7 +121,7 @@ class DailyExpenses extends Component {
   render() {
       const { onFormChange } = this
       const { name, price, category, frequency, incomeExpense, date, recordData } = this.state
-      let { filteredData, dailyExpense, onCalendarChange, token } = this.props
+      let { filteredData, dailyExpense, onCalendarChange, token, todaysDate } = this.props
       let allCategories = categories.map((c) => (<option>{c}</option>))
       let allFrequencies = frequencies.map((f) => (<option>{f}</option>))
       let data = filteredData.map((item) => (
@@ -135,6 +137,7 @@ class DailyExpenses extends Component {
       console.log(recordData)
     return (
       <div className="daily">
+          <h2>Today is {this.indexToWeekday(todaysDate.getDay())} {this.indexToMonth(todaysDate.getMonth())} {todaysDate.getDate()} {todaysDate.getFullYear()}</h2>
           {onCalendarChange && <h3>You have spent {dailyExpense} today.</h3>}
         <h1>Daily Expenses</h1>
         <form onSubmit={this.submitRecord}>
@@ -154,8 +157,9 @@ class DailyExpenses extends Component {
             </select>
             {/* <input type="text" name="date" value={date} onChange={onFormChange} placeholder={this.props.date} disabled/> */}
             <input type="submit" />
-            <p>You selected {this.indexToWeekday(this.props.date.getDay())} {this.indexToMonth(this.props.date.getMonth())} {this.props.date.getDate()} {this.props.date.getFullYear()}</p>
         </form>
+        <p>You selected {this.indexToWeekday(this.props.date.getDay())} {this.indexToMonth(this.props.date.getMonth())} {this.props.date.getDate()} {this.props.date.getFullYear()}</p>
+
         <table>
             {data}
         </table>

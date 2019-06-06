@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar/dist/entry.nostyle'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import DailyExpenses from './DailyExpenses'
 import MonthlyExpenses from './MonthlyExpenses'
 
@@ -22,9 +22,10 @@ class CalendarView extends Component {
     }
 
   render() {
-      const { onDateChange, date, onFormChange, token, userId, apiData, formattedDate, isLoggedIn, firstName, filteredData, dailyExpense, setSum, onDataChange, fetchRecords } = this.props
+      const { onDateChange, date, onFormChange, token, userId, apiData, todaysDate, isLoggedIn, firstName, filteredData, dailyExpense, setSum, onDataChange, fetchRecords } = this.props
     return (
     <div>
+        {userId && token ? null : <Redirect to="/"/>}
         <div className="calendar">
         <h1>Welcome, {firstName}</h1>
         <Calendar
@@ -34,7 +35,7 @@ class CalendarView extends Component {
         />
         
         </div>
-        <h3>You spent ${dailyExpense.toFixed(2)} on {`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`}.</h3>
+        <h3>You spent ${dailyExpense.toFixed(2)} on {`${date.getMonth()+1}/${date.getDate()}/${date.getFullYear()}`}.</h3>
         <div className="switch">
             <Switch>
                 <Route path="/calendar/daily" render={() => 
@@ -45,7 +46,7 @@ class CalendarView extends Component {
                 userId={userId}
                 apiData={apiData}
                 isLoggedIn={isLoggedIn}
-                formattedDate={formattedDate}
+                todaysDate={todaysDate}
                 filteredData={filteredData}
                 dailyExpense={dailyExpense}
                 setSum={setSum}
