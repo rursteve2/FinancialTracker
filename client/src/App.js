@@ -6,7 +6,6 @@ import { Route, Switch } from 'react-router-dom'
 import CalendarView from './components/CalendarView'
 import Register from './components/Register'
 import { loginUser, createUser, getRecords } from './services/api'
-import { async } from 'q';
 
 
 class App extends Component {
@@ -36,14 +35,8 @@ class App extends Component {
 
   onDateChange = async (date) => {
     await this.setState({ date })
-      // console.log(this.state.apiData[0].date)
       this.onDataChange()
-      console.log(Date.parse(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`))
-      // console.log(this.state.apiData[0].date)
-     
-
-    // console.log(this.state.apiData, this.state.todaysDate, this.state.filteredData)
-
+      console.log(Date.parse(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`))    
   }
 
   changeEntry = async (e, index, id) => {
@@ -97,7 +90,7 @@ closeEntrySubmit = async (index) => {
     newData.forEach(el => {
       el.isEdit = false
     });
-    let getPrice = newData.map((item)=> item.price)
+    let getPrice = newData.map((item)=> parseFloat(item.price))
     let sumPrice = getPrice.reduce((num, a) => num += a,0); 
     this.setState({
       filteredData: newData,
@@ -250,6 +243,7 @@ onFormItemChange = (event, index) => {
             filteredData={this.state.filteredData}
             firstName={this.state.firstName}
             dailyExpense={this.state.dailyExpense}
+            monthlyExpense={this.state.monthlyExpense}
             onCalendarChange={this.state.onCalendarChange}
             setSum={this.setSum}
             onDataChange={this.onDataChange}

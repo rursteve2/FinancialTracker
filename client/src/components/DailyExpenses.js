@@ -132,6 +132,7 @@ class DailyExpenses extends Component {
         }
         await updateRecord(this.props.userId, id, updatedEntry, this.props.token)
         closeEntrySubmit(index)
+        this.props.onDataChange()
 
     }
 
@@ -143,27 +144,12 @@ class DailyExpenses extends Component {
       let { filteredData, dailyExpense, onCalendarChange, token, todaysDate, changeEntry, closeEntry, onFormItemChange } = this.props
       let allCategories = categories.map((c) => (<option>{c}</option>))
       let allFrequencies = frequencies.map((f) => (<option>{f}</option>))
-    //   let form = (
-    //     <form onSubmit={() => this.updateEntry()}>
-    //         <input type="text" placeholder="Name" name="name" value={this.state.name} onChange={onFormChange}/> 
-    //         <input type="text" placeholder="Price" name="price" value={this.state.price} onChange={onFormChange}/>  
-    //         <input type="submit" /> 
-    //         <select onChange={onFormChange} name="category" value={category}>
-    //             <option selected="selected">{this.state.editCategory}</option>
-    //             {allCategories}
-    //         </select>   
-    //         <select onChange={onFormChange} name="frequency" value={frequency}>
-    //             <option selected="selected">{this.state.editFrequency}</option>
-    //             {allFrequencies}
-    //         </select>   
-    //     </form>)
-
       let data = filteredData.map((item, index) => (
             <div>
           {item.isEdit 
           ? <form onSubmit={(e) => this.updateEntry(e, index, item.id)}>
                 <input type="text" placeholder="Name" name="name" value={item.name} onChange={(e) => onFormItemChange(e, index)}/> 
-                <input type="text" placeholder="Price" name="price" value={item.price} onChange={(e) => onFormItemChange(e, index)}/>  
+                <input type="number" placeholder="Price" name="price" value={item.price} onChange={(e) => onFormItemChange(e, index)} required/>  
                 <select onChange={(e) => onFormItemChange(e, index)} name="category" value={item.category}>
                     <option selected="selected">{item.category}</option>
                     {allCategories}
@@ -179,14 +165,13 @@ class DailyExpenses extends Component {
                 <td>{item.name}</td>
                 <td>{item.category}</td>
                 <td>{item.frequency}</td>
-                <td>{item.price}</td>
+                <td>{parseFloat(item.price).toFixed(2)}</td>
                 <button onClick={(e) => changeEntry(e, index, item.id)}>Change</button>
                 <button onClick={e => this.deletePost(e, item.id, token)}>Delete</button>
             </tr>}
             </div>
           
       ))
-      console.log(this.state.filteredData)
     return (
       <div className="daily">
           <h2>Today is {this.indexToWeekday(todaysDate.getDay())} {this.indexToMonth(todaysDate.getMonth())} {todaysDate.getDate()} {todaysDate.getFullYear()}</h2>
@@ -194,7 +179,7 @@ class DailyExpenses extends Component {
         <h1>Daily Expenses</h1>
         <form onSubmit={this.submitRecord}>
             <input type="text" placeholder="Name" name="name" value={name} onChange={onFormChange}/>
-            <input type="text" placeholder="Price" name="price" value={price} onChange={onFormChange}/>
+            <input type="number" placeholder="Price" name="price" value={price} onChange={onFormChange} required/>
             <select onChange={onFormChange} name="category" value={category}>
                 <option selected="selected">Other</option>
                 {allCategories}
