@@ -88,9 +88,10 @@ input, select {
   margin-right: 3px;
   border: none;
 }
-input:focus, select:focus, button:focus {
 
-  /* border: 1px solid white; */
+.dailyinput input {
+  height: 35px;
+  font-size: 20px;
 }
 button {
   color: white;
@@ -110,12 +111,14 @@ td, th {
   text-align: center;
 }
 
-.editform input, select {
+/* .editform input, select {
   width: 16%;
   text-align: center;
-}
+} */
 th {
   height: 30px;
+  font-size: 20px;
+  font-weight: bold;
   
 }
 abbr {
@@ -134,6 +137,7 @@ abbr {
   
 }
 .editform input, select, button {
+  
   font-size: 20px;
 }
 

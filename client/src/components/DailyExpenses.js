@@ -186,7 +186,7 @@ class DailyExpenses extends Component {
           <h2>Today is {this.indexToWeekday(todaysDate.getDay())}, {this.indexToMonth(todaysDate.getMonth())} {todaysDate.getDate()} {todaysDate.getFullYear()}</h2>
           {onCalendarChange && <h3>You have spent {dailyExpense} today.</h3>}
         <h1>Daily Expenses</h1>
-        <form onSubmit={this.submitRecord}>
+        <form className="dailyinput"onSubmit={this.submitRecord}>
             <input type="text" placeholder="Name" name="name" value={name} onChange={onFormChange}/>
             <input type="number" placeholder="Price" name="price" value={price} onChange={onFormChange} required/>
             <select onChange={onFormChange} name="category" value={category}>
