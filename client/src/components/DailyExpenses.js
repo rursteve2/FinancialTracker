@@ -145,7 +145,7 @@ class DailyExpenses extends Component {
       let allCategories = categories.map((c) => (<option>{c}</option>))
       let allFrequencies = frequencies.map((f) => (<option>{f}</option>))
       let data = filteredData.map((item, index) => (
-            <div>
+            <div className="editform">
           {item.isEdit 
           ? <form onSubmit={(e) => this.updateEntry(e, index, item.id)}>
                 <input type="text" placeholder="Name" name="name" value={item.name} onChange={(e) => onFormItemChange(e, index)}/> 
@@ -165,9 +165,10 @@ class DailyExpenses extends Component {
                 <td className="itemname">{item.name}</td>
                 <td className="itemcategory">{item.category}</td>
                 <td className="itemfrequency">{item.frequency}</td>
+                <td className="itemincomeexpense">{item.income_expense}</td>
                 <td className="itemprice">{parseFloat(item.price).toFixed(2)}</td>
                 <div className="itembuttons">
-                    <button onClick={(e) => changeEntry(e, index, item.id)}>Change</button>
+                    <button onClick={e => changeEntry(e, index, item.id)}>Change</button>
                     <button onClick={e => this.deletePost(e, item.id, token)}>Delete</button>
                 </div>
             </tr>}
@@ -199,6 +200,14 @@ class DailyExpenses extends Component {
         <p>You selected {this.indexToWeekday(this.props.date.getDay())} {this.indexToMonth(this.props.date.getMonth())} {this.props.date.getDate()} {this.props.date.getFullYear()}</p>
 
         <table>
+            <tr className="itemrow">
+                <th className="itemname">Name</th>
+                <th className="itemcategory">Category</th>
+                <th className="itemfrequency">Frequency</th>
+                <th className="itemincomeexpense">Income/Expense</th>
+                <th className="itemprice">Amount</th>
+                <th className="itembuttons"></th>
+            </tr>
             {data}
         </table>
       </div>

@@ -151,25 +151,30 @@ class MonthlyExpenses extends Component {
         <h1>Total Expenses</h1>
         {/* <Link onClick={this.filterData}>Get Data</Link>
         <Link to="/incomeexpenses">Daily Chart</Link> */}
-        <h2>Income or Expense?</h2>
-        <PieChart data={[["Income", income], ["Expenses", expense]]} />
-        <h2>Category</h2>
-        <PieChart data={[
-            ["Breakfast", breakfast],
-            ["Lunch", lunch], 
-            ["Household", household], 
-            ["Apparel", apparel], 
-            ["Utilities", utilities], 
-            ["Rent/Mortgage", rent], 
-            ["Subscriptions", subscriptions],
-            ["Groceries", groceries],
-            ["Travel", travel],
-            ["Transportation", transportation],
-            ["Other", other]
-         ]}/> 
-         <h2>Frequency</h2>
-        <PieChart data={[["Once", this.state.freqOnce], ["Daily", this.state.freqDaily], ["Monthly", this.state.freqMonthly]]} />
-
+        <div className="piechart">
+            <h2>Income or Expense?</h2>
+            <PieChart data={[["Income", income], ["Expenses", expense]]} />
+        </div>
+        <div className="piechart">
+            <h2>Category</h2>
+            <PieChart data={[
+                ["Breakfast", breakfast],
+                ["Lunch", lunch], 
+                ["Household", household], 
+                ["Apparel", apparel], 
+                ["Utilities", utilities], 
+                ["Rent/Mortgage", rent], 
+                ["Subscriptions", subscriptions],
+                ["Groceries", groceries],
+                ["Travel", travel],
+                ["Transportation", transportation],
+                ["Other", other]
+            ]}/> 
+         </div>
+         <div className="piechart">
+            <h2>Frequency</h2>
+            <PieChart data={[["Once", this.state.freqOnce], ["Daily", this.state.freqDaily], ["Monthly", this.state.freqMonthly]]} />
+         </div>
       </div>
     );
   }
