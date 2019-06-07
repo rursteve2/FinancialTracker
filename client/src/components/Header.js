@@ -16,7 +16,7 @@ class Header extends Component {
                 Daily Expenses
             </Link>
             <Link to="/calendar/monthly">
-                Monthly Expenses
+                Total Expenses
             </Link>
         </nav>
       </div>

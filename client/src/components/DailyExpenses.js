@@ -147,19 +147,25 @@ class DailyExpenses extends Component {
       let data = filteredData.map((item, index) => (
             <div className="editform">
           {item.isEdit 
-          ? <form onSubmit={(e) => this.updateEntry(e, index, item.id)}>
-                <input type="text" placeholder="Name" name="name" value={item.name} onChange={(e) => onFormItemChange(e, index)}/> 
-                <input type="number" placeholder="Price" name="price" value={item.price} onChange={(e) => onFormItemChange(e, index)} required/>  
-                <select onChange={(e) => onFormItemChange(e, index)} name="category" value={item.category}>
+          ? <form className="itemrow" onSubmit={(e) => this.updateEntry(e, index, item.id)}>
+                <input className="itemname" type="text" placeholder="Name" name="name" value={item.name} onChange={(e) => onFormItemChange(e, index)}/> 
+                <select className="itemcategory" onChange={(e) => onFormItemChange(e, index)} name="category" value={item.category}>
                     <option selected="selected">{item.category}</option>
                     {allCategories}
                 </select>   
-                <select onChange={(e) => onFormItemChange(e, index)} name="frequency" value={item.frequency}>
+                <select className="itemfrequency" onChange={(e) => onFormItemChange(e, index)} name="frequency" value={item.frequency}>
                     <option selected="selected">{item.frequency}</option>
                     {allFrequencies}
                 </select>   
-                <input type="submit" /> 
-                <button onClick={e => closeEntry(e, index, item.id)}>Close</button>
+                <select className="itemincomeexpense" onChange={(e) => onFormItemChange(e, index)} name="incomeExpense" value={item.incomeExpense}>
+                    <option selected="selected">Expense</option>
+                    <option>Income</option>
+                </select>
+                <input className="itemprice" type="number" placeholder="Price" name="price" value={item.price} onChange={(e) => onFormItemChange(e, index)} required/>  
+                <div id="submitclose"className="itembuttons">
+                    <button type="submit">Submit</button>
+                    <button onClick={e => closeEntry(e, index, item.id)}>Close</button>
+                </div>
             </form> 
           : <tr className="itemrow">
                 <td className="itemname">{item.name}</td>
