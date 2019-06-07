@@ -13,8 +13,8 @@ class Register extends Component {
                     <input className="registerinput" type="text" placeholder="First Name" name="firstName" value={firstName} onChange={onFormChange} required/>
                     <input className="registerinput" type="text" placeholder="Last Name" name="lastName" value={lastName} onChange={onFormChange} required/>
                     <input className="registerinput" type="text" placeholder="Username" name="username" value={username} onChange={onFormChange} required/>
-                    <input className="registerinput" type="text" placeholder="Password" name="password" value={password} onChange={onFormChange} required/>
-                    <input className="registerinput" type="text" placeholder="Confirm Password" name="passwordConfirm" value={passwordConfirm} onChange={onFormChange} required/>
+                    <input className="registerinput" type="password" placeholder="Password" name="password" value={password} onChange={onFormChange} required/>
+                    <input className="registerinput" type="password" placeholder="Confirm Password" name="passwordConfirm" value={passwordConfirm} onChange={onFormChange} required/>
                     <input className="registersubmit" type="submit"/>
                 </form>
             </div>
