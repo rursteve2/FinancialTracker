@@ -26,6 +26,7 @@ class MonthlyExpenses extends Component {
             freqMonthly: 0
         }
     }
+    
     filterData = async () => {
         const arrSum = arr => arr.reduce((a,b) => a + b, 0)
         let other = await this.props.apiData.filter((month) => {
@@ -137,6 +138,10 @@ class MonthlyExpenses extends Component {
         })
     }
 
+    componentDidMount = () => {
+        this.filterData()
+    }
+
 
   render() {
       const { userId, token } = this.props
@@ -145,8 +150,8 @@ class MonthlyExpenses extends Component {
       <div className="monthly">
         {userId && token ? null : <Redirect to="/"/>}
         <h1>Monthly Expenses</h1>
-        <a onClick={this.filterData}>Get Data</a>
-        <Link to="/incomeexpenses">Daily Chart</Link>
+        {/* <Link onClick={this.filterData}>Get Data</Link>
+        <Link to="/incomeexpenses">Daily Chart</Link> */}
         <h2>Income or Expense?</h2>
         <PieChart data={[["Income", this.state.income], ["Expenses", this.state.expense]]} />
         <h2>Category</h2>
@@ -166,12 +171,6 @@ class MonthlyExpenses extends Component {
          <h2>Frequency</h2>
         <PieChart data={[["Once", this.state.freqOnce], ["Daily", this.state.freqDaily], ["Monthly", this.state.freqMonthly]]} />
 
-        {/* <Route path="/incomeexpenses" render={() =>
-            <PieChart data={[["Income", 44], ["Expenses", 23], "Test", 0]} />}/>
-        <Switch>
-            <Route path="/incomeexpenses" render={() =>
-            <PieChart data={[["Income", 44], ["Expenses", 23]]} />}/>
-        </Switch> */}
       </div>
     );
   }
