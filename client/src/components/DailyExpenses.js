@@ -161,20 +161,22 @@ class DailyExpenses extends Component {
                 <input type="submit" /> 
                 <button onClick={e => closeEntry(e, index, item.id)}>Close</button>
             </form> 
-          : <tr>
-                <td>{item.name}</td>
-                <td>{item.category}</td>
-                <td>{item.frequency}</td>
-                <td>{parseFloat(item.price).toFixed(2)}</td>
-                <button onClick={(e) => changeEntry(e, index, item.id)}>Change</button>
-                <button onClick={e => this.deletePost(e, item.id, token)}>Delete</button>
+          : <tr className="itemrow">
+                <td className="itemname">{item.name}</td>
+                <td className="itemcategory">{item.category}</td>
+                <td className="itemfrequency">{item.frequency}</td>
+                <td className="itemprice">{parseFloat(item.price).toFixed(2)}</td>
+                <div className="itembuttons">
+                    <button onClick={(e) => changeEntry(e, index, item.id)}>Change</button>
+                    <button onClick={e => this.deletePost(e, item.id, token)}>Delete</button>
+                </div>
             </tr>}
             </div>
           
       ))
     return (
       <div className="daily">
-          <h2>Today is {this.indexToWeekday(todaysDate.getDay())} {this.indexToMonth(todaysDate.getMonth())} {todaysDate.getDate()} {todaysDate.getFullYear()}</h2>
+          <h2>Today is {this.indexToWeekday(todaysDate.getDay())}, {this.indexToMonth(todaysDate.getMonth())} {todaysDate.getDate()} {todaysDate.getFullYear()}</h2>
           {onCalendarChange && <h3>You have spent {dailyExpense} today.</h3>}
         <h1>Daily Expenses</h1>
         <form onSubmit={this.submitRecord}>

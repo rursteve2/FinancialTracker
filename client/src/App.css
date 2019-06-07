@@ -1,14 +1,32 @@
+* {
+  color: white;
+  background-color: black;
+  font-family: 'Raleway', sans-serif;
+
+}
+html {
+  background-color: black;
+  height:100%;
+
+}
 .App {
   text-align: center;
+  height: 100%;
+  overflow: scroll;
+
 }
 .calendar {
   max-width: 500px;
-  background-color: #f4f4f4;
-  color: black;
+  background-color: black;
+  color: white;
   align-content: center;
   margin: 0 auto;
   display: flex;
   flex: 1;
+}
+
+a:hover, Link:hover {
+  color: rgb(136, 195, 250);
 }
 
 nav {
@@ -17,6 +35,74 @@ nav {
   justify-content: space-around;
 }
 
-.switch {
+.header {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+h1 {
+  display: block;
+}
+
+.daily {
+  display: flex;
+  flex-direction: column;
+}
+
+.loginheader, .registerheader {
+  margin-bottom: 40px;
+  font-size: 40px;
+}
+
+.login, .register {
+  text-align: center;
+  margin: auto auto;;
+  background-color: black;
+
+}
+
+.logininput, .registerinput {
+  margin-right: 20px;
+  border-radius: 10px 10px 10px 10px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+.loginsubmit, .registersubmit {
+  font-size: 30px;
+  height: 40px;
+  width: 300px;
+  border-radius: 10px 10px 10px 10px;
+}
+
+input {
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+
+}
+button {
+  color: white;
+  border-radius: 5px 5px 5px 5px;
+
+}
+.loginredirect {
+  margin-top: 40px;
+}
+.itemrow {
+  display: flex;
+  flex-direction: row;
+}
+.itemname, .itemcategory, .itemfrequency, .itemprice{
+  flex: 2;
+}
+.itembuttons {
   flex: 1;
+}
+
+.switch {
+  display: flex;
+  flex-direction: column;
 }

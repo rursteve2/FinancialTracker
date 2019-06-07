@@ -63,19 +63,3 @@ export const updateRecord = async (userId, id, data, token) => {
         console.log(e);
       }
 }
-
-// export const deletePosting = async (e, id) => {
-//     await axios.delete(`http://localhost:4567/post/${this.props.post.id}`);
-//     this.props.deletePost(this.props.id)
-//      console.log("deleted!")
- 
-//    }
-// export const getRecordsByDate = async (userId, date, token) => {
-//     try {
-//         const resp = await api.get(`/users/${userId}/records/date/${date}`, {headers: {"Authorization": token}})
-//         console.log(resp)
-//         return resp
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }

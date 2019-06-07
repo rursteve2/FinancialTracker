@@ -6,16 +6,16 @@ class Login extends Component {
     const { username, password, onFormChange, onLoginSubmit, isLoggedIn } = this.props
     const afterLogin = isLoggedIn ? <Redirect to="/calendar/daily"/> : null
     return (
-      <div>
+      <div className="login">
         {afterLogin}
         <div>
-            <h2>Login</h2>
-            <form className="login" onSubmit={onLoginSubmit}>
-                <input type="text" placeholder="Username" name="username" value={username} onChange={onFormChange} required/>
-                <input type="text" placeholder="Password" name="password" value={password} onChange={onFormChange} required/>
-                <input type="submit"/>
+            <h2 className="loginheader">Login</h2>
+            <form className="loginform" onSubmit={onLoginSubmit}>
+                <input className="logininput" type="text" placeholder="Username" name="username" value={username} onChange={onFormChange} required/>
+                <input className="logininput" type="password" placeholder="Password" name="password" value={password} onChange={onFormChange} required/>
+                <button className="loginsubmit" type="submit">Submit</button>
             </form>
-            <p>Or register <Link to="/register">here</Link></p>
+            <p className="loginredirect">Or register <Link to="/register">here</Link></p>
         </div>
       </div>
     );

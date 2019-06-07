@@ -20,8 +20,8 @@ class CalendarView extends Component {
     return (
     <div>
         {userId && token ? null : <Redirect to="/"/>}
-        <div className="calendar">
         <h1>Welcome, {firstName}</h1>
+        <div className="calendar">
         <Calendar
           onChange={onDateChange}
           value={date}

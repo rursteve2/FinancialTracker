@@ -191,14 +191,6 @@ onFormItemChange = (event, index) => {
     })
   }
 
-  // submitRecord = (id, data,  ) => {
-  //   try {
-
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
-
 
 
   render() {

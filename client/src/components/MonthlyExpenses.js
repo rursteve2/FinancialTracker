@@ -30,90 +30,89 @@ class MonthlyExpenses extends Component {
     filterData = async () => {
         const arrSum = arr => arr.reduce((a,b) => a + b, 0)
         let other = await this.props.apiData.filter((month) => {
-            return month.category == "Other"
+            return month.category === "Other"
         })
         let otherPrice = other.map(el => el.price)
 
         let transportation = await this.props.apiData.filter((month) => {
-            return month.category == "Transportation"
+            return month.category === "Transportation"
         })
         let transportationPrice = transportation.map(el => el.price)
 
         let travel = await this.props.apiData.filter((month) => {
-            return month.category == "Travel"
+            return month.category === "Travel"
         })
         let travelPrice = travel.map(el => el.price)
 
         let groceries = await this.props.apiData.filter((month) => {
-            return month.category == "Groceries"
+            return month.category === "Groceries"
         })
         let groceriesPrice = groceries.map(el => el.price)
 
         let subscriptions = await this.props.apiData.filter((month) => {
-            return month.category == "Subscriptions"
+            return month.category === "Subscriptions"
         })
         let subPrice = subscriptions.map(el => el.price)
 
         let rent = await this.props.apiData.filter((month) => {
-            return month.category == "Rent/Mortgage"
+            return month.category === "Rent/Mortgage"
         })
         let rentPrice = rent.map(el => el.price)
 
         let utilities = await this.props.apiData.filter((month) => {
-            return month.category == "Utilities"
+            return month.category === "Utilities"
         })
         let utilitiesPrice = utilities.map(el => el.price)
 
         let apparel = await this.props.apiData.filter((month) => {
-            return month.category == "Apparel"
+            return month.category === "Apparel"
         })
         let apparelPrice = apparel.map(el => el.price)
 
         let household = await this.props.apiData.filter((month) => {
-            return month.category == "Household"
+            return month.category === "Household"
         })
         let householdPrice = household.map(el => el.price)
 
         let dinner = await this.props.apiData.filter((month) => {
-            return month.category == "Dinner"
+            return month.category === "Dinner"
         })
         let dinnerPrice = dinner.map(el => el.price)
 
         let lunch = await this.props.apiData.filter((month) => {
-            return month.category == "Lunch"
+            return month.category === "Lunch"
         })
         let lunchPrice = lunch.map(el => el.price)
 
         let breakfast = await this.props.apiData.filter((month) => {
-            return month.category == "Breakfast"
+            return month.category === "Breakfast"
         })
         let breakfastPrice = breakfast.map(el => el.price)
 
         let income = await this.props.apiData.filter((month) => {
-            return month.income_expense == "Income"
+            return month.income_expense === "Income"
         })
         let incomePrice = income.map(el => el.price)
 
         let expense = await this.props.apiData.filter((month) => {
-            return month.income_expense == "Expense"
+            return month.income_expense === "Expense"
         })
         let expensePrice = expense.map(el => el.price)
 
         let freqOnce = await this.props.apiData.filter((month) => {
-            return month.frequency == "Once"
+            return month.frequency === "Once"
         })
         let freqOncePrice = freqOnce.map(el => el.price)
 
         let freqMonthly = await this.props.apiData.filter((month) => {
-            return month.frequency == "Monthly"
+            return month.frequency === "Monthly"
         })
         let freqMonthlyPrice = freqMonthly.map(el => el.price)
 
         let freqDaily = await this.props.apiData.filter((month) => {
-            return month.frequency == "Daily"
+            return month.frequency === "Daily"
         })
         let freqDailyPrice = freqDaily.map(el => el.price)
-        console.log(expensePrice)
 
         
         this.setState({
@@ -145,18 +144,18 @@ class MonthlyExpenses extends Component {
 
   render() {
       const { userId, token } = this.props
-      const { lunch, household, dinner, apparel, utilities, rent, subscriptions, groceries, travel, transportation, other, freqOnce, freqDaily, freqMonthly } = this.state
+      const { lunch, household, dinner, apparel, utilities, rent, subscriptions, groceries, travel, transportation, other, freqOnce, freqDaily, freqMonthly, breakfast, income, expense } = this.state
     return (
       <div className="monthly">
         {userId && token ? null : <Redirect to="/"/>}
-        <h1>Monthly Expenses</h1>
+        <h1>Total Expenses</h1>
         {/* <Link onClick={this.filterData}>Get Data</Link>
         <Link to="/incomeexpenses">Daily Chart</Link> */}
         <h2>Income or Expense?</h2>
-        <PieChart data={[["Income", this.state.income], ["Expenses", this.state.expense]]} />
+        <PieChart data={[["Income", income], ["Expenses", expense]]} />
         <h2>Category</h2>
         <PieChart data={[
-            ["Breakfast", this.state.breakfast],
+            ["Breakfast", breakfast],
             ["Lunch", lunch], 
             ["Household", household], 
             ["Apparel", apparel], 
