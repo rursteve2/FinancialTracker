@@ -13,9 +13,7 @@ class RecordsController < ApplicationController
 
     def create
     user = User.find params[:user_id]
-
     user.records << Record.new(record_params)
-
     render json: { record: user.records.last }
     end
 

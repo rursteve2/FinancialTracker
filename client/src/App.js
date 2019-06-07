@@ -169,7 +169,7 @@ onFormItemChange = (event, index) => {
         "last_name": this.state.lastName
       }
       const user = await createUser(setUser)
-      if (e.status = 422) {
+      if (e.status == 422) {
         alert("422!!")
       } else {
         this.setState({
