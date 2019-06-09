@@ -146,7 +146,8 @@ class DailyExpenses extends Component {
       let allFrequencies = frequencies.map((f, i) => (<option key={i}>{f}</option>))
       let data = filteredData.map((item, index) => (
             <div key={index} className="editform">
-          {item.isEdit 
+          {
+              item.isEdit 
           ? <form className="itemrow" onSubmit={(e) => this.updateEntry(e, index, item.id)}>
                 <input className="itemname" type="text" placeholder="Name" name="name" value={item.name} onChange={(e) => onFormItemChange(e, index)}/> 
                 <select className="itemcategory" onChange={(e) => onFormItemChange(e, index)} name="category" value={item.category}>
@@ -174,10 +175,10 @@ class DailyExpenses extends Component {
                 <td className="itemfrequency">{item.frequency}</td>
                 <td className="itemincomeexpense">{item.income_expense}</td>
                 <td className="itemprice">{parseFloat(item.price).toFixed(2)}</td>
-                <div className="itembuttons">
+                <td className="itembuttons">
                     <button onClick={e => changeEntry(e, index, item.id)}>Change</button>
                     <button onClick={e => this.deletePost(e, item.id, token)}>Delete</button>
-                </div>
+                </td>
             </tr>
         }
             </div>
