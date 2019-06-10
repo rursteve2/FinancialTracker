@@ -28,7 +28,7 @@ class MonthlyExpenses extends Component {
     }
     
     filterData = async () => {
-        const arrSum = arr => arr.reduce((a,b) => a + b, 0)
+        const arrSum = arr => arr.reduce((a,b) => parseFloat(a) + parseFloat(b), 0)
         let other = await this.props.apiData.filter((month) => {
             return month.category === "Other"
         })

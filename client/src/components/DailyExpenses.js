@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { makeRecord, deleteRecord, updateRecord } from '../services/api'
-let categories = ["Breakfast", "Lunch", "Dinner", "Household Items", "Apparel", "Utilities", "Rent/Mortgage", "Subscriptions", "Groceries", "Travel", "Transportation"]
-let frequencies = ["Daily", "Monthly"]
+let categories = ["Other", "Breakfast", "Lunch", "Dinner", "Household Items", "Apparel", "Utilities", "Rent/Mortgage", "Subscriptions", "Groceries", "Travel", "Transportation"]
+let frequencies = ["Once", "Daily", "Monthly"]
+let incomeExpenseArr = ["Expense", "Income"]
 
 
 class DailyExpenses extends Component {
@@ -141,6 +142,7 @@ class DailyExpenses extends Component {
       let { filteredData, dailyExpense, onCalendarChange, token, todaysDate, changeEntry, closeEntry, onFormItemChange } = this.props
       let allCategories = categories.map((c, i) => (<option key={i}>{c}</option>))
       let allFrequencies = frequencies.map((f, i) => (<option key={i}>{f}</option>))
+      let allIncomeExpense = incomeExpenseArr.map((j, i) => (<option key={i}>{j}</option>))
       let data = filteredData.map((item, index) => (
             <div key={index} className="editform">
           {
@@ -148,16 +150,17 @@ class DailyExpenses extends Component {
           ? <form className="itemrow" onSubmit={(e) => this.updateEntry(e, index, item.id)}>
                 <input className="itemname" type="text" placeholder="Name" name="name" value={item.name} onChange={(e) => onFormItemChange(e, index)}/> 
                 <select className="itemcategory" onChange={(e) => onFormItemChange(e, index)} name="category" value={item.category}>
-                    <option key={index} value="selected">{item.category}</option>
+                    {/* <option key={index} value="selected">{item.category}</option> */}
                     {allCategories}
                 </select>   
                 <select className="itemfrequency" onChange={(e) => onFormItemChange(e, index)} name="frequency" value={item.frequency}>
-                    <option key={index} value="selected">{item.frequency}</option>
+                    {/* <option key={index} value="selected">{item.frequency}</option> */}
                     {allFrequencies}
                 </select>   
-                <select className="itemincomeexpense" onChange={(e) => onFormItemChange(e, index)} name="incomeExpense" value={item.incomeExpense}>
-                    <option key={index} value="selected">Expense</option>
-                    <option>Income</option>
+                <select className="itemincomeexpense" onChange={(e) => onFormItemChange(e, index)} name="income_expense" value={item.income_expense}>
+                    {/* <option key={index} value="selected">{item.income_expense}</option>
+                    <option key={index+1}>Income</option> */}
+                    {allIncomeExpense}
                 </select>
                 <input className="itemprice" type="number" placeholder="Price" name="price" value={item.price} onChange={(e) => onFormItemChange(e, index)} required/>  
                 <div id="submitclose" className="itembuttons">
