@@ -3,6 +3,10 @@ import { makeRecord, deleteRecord, updateRecord } from '../services/api'
 let categories = ["Other", "Breakfast", "Lunch", "Dinner", "Household Items", "Apparel", "Utilities", "Rent/Mortgage", "Subscriptions", "Groceries", "Travel", "Transportation"]
 let frequencies = ["Once", "Daily", "Monthly"]
 let incomeExpenseArr = ["Expense", "Income"]
+let categories2 = ["Breakfast", "Lunch", "Dinner", "Household Items", "Apparel", "Utilities", "Rent/Mortgage", "Subscriptions", "Groceries", "Travel", "Transportation"]
+let frequencies2 = ["Daily", "Monthly"]
+let incomeExpenseArr2 = ["Income"]
+
 
 
 class DailyExpenses extends Component {
@@ -143,6 +147,9 @@ class DailyExpenses extends Component {
       let allCategories = categories.map((c, i) => (<option key={i}>{c}</option>))
       let allFrequencies = frequencies.map((f, i) => (<option key={i}>{f}</option>))
       let allIncomeExpense = incomeExpenseArr.map((j, i) => (<option key={i}>{j}</option>))
+      let allCategories2 = categories2.map((c, i) => (<option key={i}>{c}</option>))
+      let allFrequencies2 = frequencies2.map((f, i) => (<option key={i}>{f}</option>))
+      let allIncomeExpense2 = incomeExpenseArr2.map((j, i) => (<option key={i}>{j}</option>))
       let data = filteredData.map((item, index) => (
             <div key={index} className="editform">
           {
@@ -193,16 +200,17 @@ class DailyExpenses extends Component {
             <input type="text" placeholder="Name" name="name" value={name} onChange={onFormChange}/>
             <input type="number" placeholder="Price" name="price" value={price} onChange={onFormChange} required/>
             <select onChange={onFormChange} name="category" value={category}>
-                <option value="selected">Other</option>
-                {allCategories}
+                <option value="selected">{category}</option>
+                {allCategories2}
             </select>
             <select onChange={onFormChange} name="frequency" value={frequency}>
                 <option value="selected">Once</option>
-                {allFrequencies}
+                {allFrequencies2}
             </select>
             <select onChange={onFormChange} name="incomeExpense" value={incomeExpense}>
                 <option value="selected">Expense</option>
                 <option>Income</option>
+                {allIncomeExpense2}
             </select>
             <input type="submit" />
         </form>

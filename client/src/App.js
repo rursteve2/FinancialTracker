@@ -89,7 +89,6 @@ closeEntrySubmit = async (index) => {
       filteredData: newData,
       dailyExpense : sumPrice
     })
-    console.log(this.state.filteredData)
   }
 
   setSum = (num) => {
