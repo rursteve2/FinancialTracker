@@ -149,10 +149,8 @@ class MonthlyExpenses extends Component {
       <div className="monthly">
         {userId && token ? null : <Redirect to="/"/>}
         <h1>Total Expenses</h1>
-        {/* <Link onClick={this.filterData}>Get Data</Link>
-        <Link to="/incomeexpenses">Daily Chart</Link> */}
         <div className="piechart">
-            <h2>Income or Expense?</h2>
+            <h2>Income or Expense</h2>
             <PieChart data={[["Income", income], ["Expenses", expense]]} />
         </div>
         <div className="piechart">

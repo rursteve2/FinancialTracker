@@ -9,7 +9,6 @@ const api = axios.create({
 export const loginUser = async (data) => {
     try {
       const resp = await api.post(`/auth/login`, data)
-      console.log(resp.data)
       return resp.data
     } catch (e) {
       console.log(e);
@@ -28,7 +27,6 @@ export const createUser = async (data) => {
 export const getRecords = async (userId, token) => {
     try {
         const resp = await api.get(`/users/${userId}/records`, {headers: {"Authorization": token}})
-        console.log(resp.data)
         return resp.data.records
     } catch(e) {
         console.log(e)
@@ -38,7 +36,6 @@ export const getRecords = async (userId, token) => {
 export const makeRecord = async (userId, data, token) => {
     try {
         const resp = await api.post(`/users/${userId}/records`, data, {headers: {"Authorization": token}})
-        console.log(resp)
         return resp
     } catch (e) {
         console.log(e)

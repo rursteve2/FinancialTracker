@@ -91,8 +91,6 @@ class DailyExpenses extends Component {
                 "user_id": this.props.userId
             }
             let record = await makeRecord(this.props.userId, setRecord, this.props.token)
-            console.log(Date.parse(this.props.date))
-            console.log(setRecord)
             this.props.fetchRecords()
             if (record === undefined) {
                 alert("Please Log In")
@@ -115,7 +113,6 @@ class DailyExpenses extends Component {
           await deleteRecord(this.props.userId, id, this.props.token)
           this.props.fetchRecords()
           this.props.onDataChange()
-          console.log("Deleted post with id", id)
       }
 
       

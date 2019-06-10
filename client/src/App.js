@@ -36,13 +36,10 @@ class App extends Component {
   onDateChange = async (date) => {
     await this.setState({ date })
       this.onDataChange()
-      console.log(Date.parse(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`))    
   }
 
   changeEntry = async (e, index, id) => {
     e.preventDefault()
-    console.log("updating", id)
-    console.log(e.target.value)
     let {filteredData, current} = this.state
     filteredData[index].isEdit = true
     filteredData.forEach( (element,index) => {
@@ -55,11 +52,9 @@ class App extends Component {
     })
 }
 closeEntry = async (e, index, id) => {
-  console.log("updating", id)
   let {filteredData, current} = this.state
   filteredData[index] = {...current[index]}
   filteredData[index].isEdit = false
-  console.log(this.state.current)
   await this.setState({
     filteredData
   })
@@ -74,7 +69,6 @@ closeEntrySubmit = async (index) => {
     element.isEdit = false
     
   });
-  console.log(this.state.current)
   await this.setState({
     filteredData
   })
@@ -86,7 +80,6 @@ closeEntrySubmit = async (index) => {
   onDataChange = async () => {
     let newData = await this.state.apiData.filter((result) => 
     result.date == Date.parse(`${this.state.date.getFullYear()}-${this.state.date.getMonth()}-${this.state.date.getDate()}`))
-    console.log(newData)
     newData.forEach(el => {
       el.isEdit = false
     });
@@ -121,7 +114,6 @@ closeEntrySubmit = async (index) => {
           password: ""
         })
         localStorage.setItem('token', user.token)
-        console.log(this.state.userId, this.state.isLoggedIn, this.state.token)
         this.fetchRecords()
     } catch(e) {
       alert("Wrong username or password")
@@ -131,7 +123,6 @@ closeEntrySubmit = async (index) => {
 
   fetchRecords = async () => {
     let allRecords = await getRecords(this.state.userId, this.state.token)
-        console.log('all',allRecords)
         this.setState({
           apiData: allRecords,
         })
@@ -142,7 +133,6 @@ closeEntrySubmit = async (index) => {
     if (localStorage.getItem('token') != null) {
       this.setState({
         token: localStorage.getItem('token')
-        // todaysDate: `${new Date().getFullYear()}-${new Date().getMonth()+1}-${new Date().getDate()}`
       })
     }
   }
