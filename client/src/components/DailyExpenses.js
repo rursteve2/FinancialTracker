@@ -104,6 +104,13 @@ class DailyExpenses extends Component {
                     isAdded: true
                 })
                 alert("Success!")
+                this.setState({
+                    name: "",
+                    price: "",
+                    category: "Other",
+                    frequency: "Once",
+                    incomeExpense: "Expense"
+                })
                 this.props.onDataChange()
 
             }
@@ -147,9 +154,9 @@ class DailyExpenses extends Component {
       let allCategories = categories.map((c, i) => (<option key={i}>{c}</option>))
       let allFrequencies = frequencies.map((f, i) => (<option key={i}>{f}</option>))
       let allIncomeExpense = incomeExpenseArr.map((j, i) => (<option key={i}>{j}</option>))
-      let allCategories2 = categories2.map((c, i) => (<option key={i}>{c}</option>))
-      let allFrequencies2 = frequencies2.map((f, i) => (<option key={i}>{f}</option>))
-      let allIncomeExpense2 = incomeExpenseArr2.map((j, i) => (<option key={i}>{j}</option>))
+      let allCategories2 = categories2.map((c, i) => (<option value={c} key={i}>{c}</option>))
+      let allFrequencies2 = frequencies2.map((f, i) => (<option value={f} key={i}>{f}</option>))
+      let allIncomeExpense2 = incomeExpenseArr2.map((j, i) => (<option value={j} key={i}>{j}</option>))
       let data = filteredData.map((item, index) => (
             <div key={index} className="editform">
           {
@@ -198,20 +205,20 @@ class DailyExpenses extends Component {
         <h1>Daily Expenses</h1>
         <form className="dailyinput"onSubmit={this.submitRecord}>
             <input type="text" placeholder="Name" name="name" value={name} onChange={onFormChange}/>
-            <input type="number" placeholder="Price" name="price" value={price} onChange={onFormChange} required/>
             <select onChange={onFormChange} name="category" value={category}>
-                <option value="selected">{category}</option>
+                <option value="Other" selected>Other</option>
                 {allCategories2}
             </select>
             <select onChange={onFormChange} name="frequency" value={frequency}>
-                <option value="selected">Once</option>
+                <option value="Once" selected>Once</option>
                 {allFrequencies2}
             </select>
             <select onChange={onFormChange} name="incomeExpense" value={incomeExpense}>
-                <option value="selected">Expense</option>
-                <option>Income</option>
+                <option value="Expense" selected>Expense</option>
                 {allIncomeExpense2}
             </select>
+            <input type="number" placeholder="Price" name="price" value={price} onChange={onFormChange} required/>
+
             <input type="submit" />
         </form>
         <p>You selected {this.indexToWeekday(this.props.date.getDay())} {this.indexToMonth(this.props.date.getMonth())} {this.props.date.getDate()} {this.props.date.getFullYear()}</p>
