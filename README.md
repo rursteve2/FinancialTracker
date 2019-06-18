@@ -30,5 +30,5 @@ This project will be combining Ruby on Rails with React. It will also be styled 
 - Pie charts will still display the category even if it has nothing in it.
 
 # Deployment
-Can be seen at
+Can be seen at financialtracker.surge.sh
 
