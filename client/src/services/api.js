@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const URL = `http://localhost:4567`;
+const URL = `https://financial-trackerp4.herokuapp.com`;
 
 const api = axios.create({
     baseURL: `${URL}`
