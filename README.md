@@ -2,6 +2,10 @@
 
 This is a tracker for personal finances. It will be defined by month, in which you can add/delete finances on any day and it will tell you how much you spent per day, or per month. This is meant to keep us more proactive with how much we spend daily and monthly, so that we can manage our expenses much better. The default date is today. There is also a page that generates charts dynamically for each dropdown.
 
+# Test login
+Username - hello
+Password - helloworld
+
 # Technologies Used
 
 This project will be combining Ruby on Rails with React. It will also be styled with CSS.
